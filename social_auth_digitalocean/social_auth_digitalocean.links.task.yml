@@ -1,0 +1,4 @@
+social_auth_digitalocean.settings.tab:
+  title: 'Digitalocean'
+  route_name: social_auth_digitalocean.settings_form
+  base_route: social_auth.integrations
