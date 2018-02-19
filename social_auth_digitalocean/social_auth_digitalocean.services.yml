@@ -1,9 +1,0 @@
-services:
-  social_auth_digitalocean.manager:
-    class: Drupal\social_auth_digitalocean\DigitaloceanAuthManager
-    arguments:
-      - '@logger.factory'
-      - '@event_dispatcher'
-      - '@entity_field.manager'
-      - '@url_generator.non_bubbling'
-      - '@config.factory'

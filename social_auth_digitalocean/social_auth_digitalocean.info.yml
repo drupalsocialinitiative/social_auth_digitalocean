@@ -1,8 +1,0 @@
-name: Social Auth Digitalocean
-type: module
-description: 'Social Auth integration for Digitalocean.'
-package: Social
-core: 8.x
-configure: social_auth_digitalocean.settings_form
-dependencies:
-  - social_auth:social_auth (>= 8.x-2.x)
