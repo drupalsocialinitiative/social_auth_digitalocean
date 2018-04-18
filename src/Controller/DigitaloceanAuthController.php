@@ -102,7 +102,7 @@ class DigitaloceanAuthController extends ControllerBase {
       $container->get('social_auth.user_manager'),
       $container->get('social_auth_digitalocean.manager'),
       $container->get('request_stack'),
-      $container->get('social_auth.social_auth_data_handler'),
+      $container->get('social_auth.data_handler'),
       $container->get('logger.factory')
     );
   }
@@ -113,7 +113,7 @@ class DigitaloceanAuthController extends ControllerBase {
    * Redirects the user to Digitalocean for authentication.
    */
   public function redirectToDigitalocean() {
-    /* @var \League\OAuth2\Client\Provider\Digitalocean false $digitalocean */
+    /* @var \ChrisHemmings\OAuth2\Client\Provider\DigitalOcean|false $digitalocean */
     $digitalocean = $this->networkManager->createInstance('social_auth_digitalocean')->getSdk();
 
     // If digitalocean client could not be obtained.
@@ -125,10 +125,8 @@ class DigitaloceanAuthController extends ControllerBase {
     // Digitalocean service was returned, inject it to $digitaloceanManager.
     $this->digitaloceanManager->setClient($digitalocean);
 
-    // Generates the URL where the user will be redirected for Digitalocean login.
-    // If the user did not have email permission granted on previous attempt,
-    // we use the re-request URL requesting only the email address.
-    $digitalocean_login_url = $this->digitaloceanManager->getDigitaloceanLoginUrl();
+    // Generates the URL where the user will be redirected for authentication.
+    $digitalocean_login_url = $this->digitaloceanManager->getAuthorizationUrl();
 
     $state = $this->digitaloceanManager->getState();
 
@@ -140,7 +138,7 @@ class DigitaloceanAuthController extends ControllerBase {
   /**
    * Response for path 'user/login/digitalocean/callback'.
    *
-   * Digitalocean returns the user here after user has authenticated in Digitalocean.
+   * Digitalocean returns the user here after user has authenticated.
    */
   public function callback() {
     // Checks if user cancel login via Digitalocean.
@@ -150,7 +148,7 @@ class DigitaloceanAuthController extends ControllerBase {
       return $this->redirect('user.login');
     }
 
-    /* @var \League\OAuth2\Client\Provider\Digitalocean false $digitalocean */
+    /* @var \ChrisHemmings\OAuth2\Client\Provider\Digitalocean|false $digitalocean */
     $digitalocean = $this->networkManager->createInstance('social_auth_digitalocean')->getSdk();
 
     // If Digitalocean client could not be obtained.
@@ -175,13 +173,17 @@ class DigitaloceanAuthController extends ControllerBase {
     $this->digitaloceanManager->setClient($digitalocean)->authenticate();
 
     // Gets user's info from Digitalocean API.
-    if (!$digitalocean_profile = $this->digitaloceanManager->getUserInfo()) {
+    /* @var \ChrisHemmings\OAuth2\Client\Provider\DigitalOceanResourceOwner $profile */
+    if (!$profile = $this->digitaloceanManager->getUserInfo()) {
       drupal_set_message($this->t('Digitalocean login failed, could not load Digitalocean profile. Contact site administrator.'), 'error');
       return $this->redirect('user.login');
     }
 
+    // Gets (or not) extra initial data.
+    $data = $this->userManager->checkIfUserExists($profile->getId()) ? NULL : $this->digitaloceanManager->getExtraDetails();
+
     // If user information could be retrieved.
-    return $this->userManager->authenticateUser('drupal_user', $digitalocean_profile->getEmail(), $digitalocean_profile->getId(), $this->digitaloceanManager->getAccessToken()->getToken(), '', ' ');
+    return $this->userManager->authenticateUser($profile->getId(), $profile->getEmail(), $profile->getId(), $this->digitaloceanManager->getAccessToken(), FALSE, $data);
   }
 
 }

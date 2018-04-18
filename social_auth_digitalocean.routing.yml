@@ -3,7 +3,8 @@ social_auth_digitalocean.redirect_to_digitalocean:
   defaults:
     _controller: '\Drupal\social_auth_digitalocean\Controller\DigitaloceanAuthController::redirectToDigitalocean'
   requirements:
-    _role: 'anonymous'
+    # Anonymous users can log in, but authenticated users can also associate a new provider.
+    _access: 'TRUE'
   options:
     no_cache: TRUE
 
@@ -12,7 +13,8 @@ social_auth_digitalocean.callback:
   defaults:
     _controller: '\Drupal\social_auth_digitalocean\Controller\DigitaloceanAuthController::callback'
   requirements:
-    _role: 'anonymous'
+    # Anonymous users can log in, but authenticated users can also associate a new provider.
+    _access: 'TRUE'
   options:
     no_cache: TRUE
 

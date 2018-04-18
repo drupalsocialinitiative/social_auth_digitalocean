@@ -107,6 +107,32 @@ class DigitaloceanAuthSettingsForm extends SocialAuthSettingsForm {
       '#default_value' => $GLOBALS['base_url'] . '/user/login/digitalocean/callback',
     ];
 
+    $form['digitalocean_settings']['advanced'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Advanced settings'),
+      '#open' => FALSE,
+    ];
+
+    $form['digitalocean_settings']['advanced']['scopes'] = [
+      '#type' => 'radios',
+      '#title' => $this->t('Scopes for API call'),
+      '#default_value' => $config->get('scopes'),
+      '#options' => ['read' => 'read', 'read write' => 'read write'],
+      '#description' => $this->t('Select the scope to be requested<br>
+                                  You can see a description of the scopes <a href="@scopes">here</a>.', ['@scopes' => 'https://developers.digitalocean.com/documentation/oauth/#scopes']),
+    ];
+
+    $form['digitalocean_settings']['advanced']['endpoints'] = [
+      '#type' => 'textarea',
+      '#title' => $this->t('API calls to be made to collect data'),
+      '#default_value' => $config->get('endpoints'),
+      '#description' => $this->t('Define the endpoints to be requested when user authenticates with DigitalOcean for the first time<br>
+                                  Enter each endpoint in different lines in the format <em>endpoint</em>|<em>name_of_endpoint</em>.<br>
+                                  <b>For instance:</b><br>
+                                  /v2/actions|user_actions<br>
+                                  /v2/volumes|user_volumes'),
+    ];
+
     return parent::buildForm($form, $form_state);
   }
 
@@ -118,6 +144,8 @@ class DigitaloceanAuthSettingsForm extends SocialAuthSettingsForm {
     $this->config('social_auth_digitalocean.settings')
       ->set('client_id', $values['client_id'])
       ->set('client_secret', $values['client_secret'])
+      ->set('scopes', $values['scopes'])
+      ->set('endpoints', $values['endpoints'])
       ->save();
 
     parent::submitForm($form, $form_state);

@@ -2,6 +2,7 @@
 
 namespace Drupal\social_auth_digitalocean\Plugin\Network;
 
+use ChrisHemmings\OAuth2\Client\Provider\DigitalOcean;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
@@ -11,7 +12,6 @@ use Drupal\social_api\Plugin\NetworkBase;
 use Drupal\social_api\SocialApiException;
 use Drupal\social_auth_digitalocean\Settings\DigitaloceanAuthSettings;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use League\OAuth2\Client\Provider\Digitalocean;
 use Drupal\Core\Site\Settings;
 
 /**
@@ -66,7 +66,7 @@ class DigitaloceanAuth extends NetworkBase implements DigitaloceanAuthInterface 
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     return new static(
-      $container->get('social_auth.social_auth_data_handler'),
+      $container->get('social_auth.data_handler'),
       $configuration,
       $plugin_id,
       $plugin_definition,
@@ -122,7 +122,7 @@ class DigitaloceanAuth extends NetworkBase implements DigitaloceanAuthInterface 
   /**
    * Sets the underlying SDK library.
    *
-   * @return \League\OAuth2\Client\Provider\Digitalocean
+   * @return \ChrisHemmings\OAuth2\Client\Provider\DigitalOcean
    *   The initialized 3rd party library instance.
    *
    * @throws SocialApiException
@@ -136,28 +136,23 @@ class DigitaloceanAuth extends NetworkBase implements DigitaloceanAuthInterface 
     }
     /* @var \Drupal\social_auth_digitalocean\Settings\DigitaloceanAuthSettings $settings */
     $settings = $this->settings;
-    // Proxy configuration data for outward proxy.
-    $proxyUrl = $this->siteSettings->get("http_client_config")["proxy"]["http"];
     if ($this->validateConfig($settings)) {
       // All these settings are mandatory.
+      $league_settings = [
+        'clientId' => $settings->getClientId(),
+        'clientSecret' => $settings->getClientSecret(),
+        'redirectUri' => $this->requestContext->getCompleteBaseUrl() . '/user/login/digitalocean/callback',
+      ];
+
+      // Proxy configuration data for outward proxy.
+      $proxyUrl = $this->siteSettings->get('http_client_config')['proxy']['http'];
       if ($proxyUrl) {
-        $league_settings = [
-          'clientId' => $settings->getClientId(),
-          'clientSecret' => $settings->getClientSecret(),
-          'redirectUri' => $this->requestContext->getCompleteBaseUrl() . '/user/login/digitalocean/callback',
-          'proxy' => $proxyUrl,
-        ];
-      }
-      else {
-        $league_settings = [
-          'clientId' => $settings->getClientId(),
-          'clientSecret' => $settings->getClientSecret(),
-          'redirectUri' => $this->requestContext->getCompleteBaseUrl() . '/user/login/digitalocean/callback',
-        ];
+        $league_settings['proxy'] = $proxyUrl;
       }
 
-      return new \ChrisHemmings\OAuth2\Client\Provider\DigitalOcean($league_settings);
+      return new DigitalOcean($league_settings);
     }
+
     return FALSE;
   }
 

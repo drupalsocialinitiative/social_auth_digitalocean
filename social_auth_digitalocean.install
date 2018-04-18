@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Install, update, and uninstall functions for the Social Auth Digitalocean module.
+ * Install, update, and uninstall functions for the Social Auth Digitalocean.
  */
 
 use Drupal\social_api\Utility\SocialApiImplementerInstaller;
