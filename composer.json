@@ -1,7 +1,7 @@
 {
     "name": "drupal/social_auth_digitalocean",
     "type": "drupal-module",
-    "description": "Social Auth integration for Digitalocean.",
+    "description": "Social Auth integration for DigitalOcean.",
     "keywords": ["Drupal"],
     "license": "GPL-2.0+",
     "homepage": "https://www.drupal.org/project/social_auth_digitalocean",

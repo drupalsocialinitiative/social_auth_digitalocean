@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Hook implementations for Social Auth Digitalocean module.
+ * Hook implementations for Social Auth DigitalOcean module.
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
@@ -14,10 +14,10 @@ function social_auth_digitalocean_help($route_name, RouteMatchInterface $route_m
   $output = '';
 
   switch ($route_name) {
-    case 'simple_digitalocean_connect.settings_form':
+    case 'help.page.social_auth_digitalocean':
       $output = '<h3>' . t('Configuration instructions') . '</h3>';
       $output .= '<p>';
-      $output .= t('Configuration instructions and other useful documentation can be found from <a href="@handbook-url">Social Auth Digitalocean Handbook</a>.', ['@handbook-url' => 'https://www.drupal.org/node/2764227']);
+      $output .= t('Configuration instructions and other useful documentation can be found from <a href="@handbook-url">Social Auth DigitalOcean Handbook</a>.', ['@handbook-url' => 'https://www.drupal.org/node/2764227']);
       $output .= '</p>';
       break;
 

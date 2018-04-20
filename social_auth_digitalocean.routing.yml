@@ -1,7 +1,7 @@
 social_auth_digitalocean.redirect_to_digitalocean:
   path: 'user/login/digitalocean'
   defaults:
-    _controller: '\Drupal\social_auth_digitalocean\Controller\DigitaloceanAuthController::redirectToDigitalocean'
+    _controller: '\Drupal\social_auth_digitalocean\Controller\DigitalOceanAuthController::redirectToDigitalOcean'
   requirements:
     # Anonymous users can log in, but authenticated users can also associate a new provider.
     _access: 'TRUE'
@@ -11,7 +11,7 @@ social_auth_digitalocean.redirect_to_digitalocean:
 social_auth_digitalocean.callback:
   path: 'user/login/digitalocean/callback'
   defaults:
-    _controller: '\Drupal\social_auth_digitalocean\Controller\DigitaloceanAuthController::callback'
+    _controller: '\Drupal\social_auth_digitalocean\Controller\DigitalOceanAuthController::callback'
   requirements:
     # Anonymous users can log in, but authenticated users can also associate a new provider.
     _access: 'TRUE'
@@ -21,7 +21,7 @@ social_auth_digitalocean.callback:
 social_auth_digitalocean.settings_form:
   path: 'admin/config/social-api/social-auth/digitalocean'
   defaults:
-    _title: 'Social Auth Digitalocean settings'
-    _form: '\Drupal\social_auth_digitalocean\Form\DigitaloceanAuthSettingsForm'
+    _title: 'Social Auth DigitalOcean settings'
+    _form: '\Drupal\social_auth_digitalocean\Form\DigitalOceanAuthSettingsForm'
   requirements:
     _permission: 'administer social api authentication'

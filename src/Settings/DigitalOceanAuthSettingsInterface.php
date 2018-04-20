@@ -3,9 +3,9 @@
 namespace Drupal\social_auth_digitalocean\Settings;
 
 /**
- * Defines an interface for Social Auth Digitalocean settings.
+ * Defines an interface for Social Auth DigitalOcean settings.
  */
-interface DigitaloceanAuthSettingsInterface {
+interface DigitalOceanAuthSettingsInterface {
 
   /**
    * Gets the client ID.

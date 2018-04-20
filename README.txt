@@ -13,7 +13,7 @@ CONTENTS OF THIS FILE
 INTRODUCTION
 ------------
 
-Social Auth DigitalOcean Module is a DigitalOcean Authentication integration for
+Social Auth DigitalOcean is a DigitalOcean authentication integration for
 Drupal.
 
 
@@ -45,7 +45,7 @@ CONFIGURATION
  * Add your DigitalOcean project OAuth information in
    Configuration » User Authentication » DigitalOcean.
 
- * Place a Social Auth DigitalOcean block in Structure » Block Layout.
+ * Place a Social Auth Login block in Structure » Block Layout.
 
  * If you already have a Social Auth Login block in the site, rebuild the cache.
 

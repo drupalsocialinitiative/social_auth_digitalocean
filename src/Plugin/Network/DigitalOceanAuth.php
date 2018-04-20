@@ -10,28 +10,28 @@ use Drupal\Core\Routing\RequestContext;
 use Drupal\social_auth\SocialAuthDataHandler;
 use Drupal\social_api\Plugin\NetworkBase;
 use Drupal\social_api\SocialApiException;
-use Drupal\social_auth_digitalocean\Settings\DigitaloceanAuthSettings;
+use Drupal\social_auth_digitalocean\Settings\DigitalOceanAuthSettings;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Site\Settings;
 
 /**
- * Defines a Network Plugin for Social Auth Digitalocean.
+ * Defines a Network Plugin for Social Auth DigitalOcean.
  *
  * @package Drupal\simple_digitalocean_connect\Plugin\Network
  *
  * @Network(
  *   id = "social_auth_digitalocean",
- *   social_network = "Digitalocean",
+ *   social_network = "DigitalOcean",
  *   type = "social_auth",
  *   handlers = {
  *     "settings": {
- *       "class": "\Drupal\social_auth_digitalocean\Settings\DigitaloceanAuthSettings",
+ *       "class": "\Drupal\social_auth_digitalocean\Settings\DigitalOceanAuthSettings",
  *       "config_id": "social_auth_digitalocean.settings"
  *     }
  *   }
  * )
  */
-class DigitaloceanAuth extends NetworkBase implements DigitaloceanAuthInterface {
+class DigitalOceanAuth extends NetworkBase implements DigitalOceanAuthInterface {
 
   /**
    * The Social Auth Data Handler.
@@ -79,7 +79,7 @@ class DigitaloceanAuth extends NetworkBase implements DigitaloceanAuthInterface 
   }
 
   /**
-   * DigitaloceanAuth constructor.
+   * DigitalOceanAuth constructor.
    *
    * @param \Drupal\social_auth\SocialAuthDataHandler $data_handler
    *   The data handler.
@@ -132,9 +132,9 @@ class DigitaloceanAuth extends NetworkBase implements DigitaloceanAuthInterface 
 
     $class_name = 'ChrisHemmings\OAuth2\Client\Provider\DigitalOcean';
     if (!class_exists($class_name)) {
-      throw new SocialApiException(sprintf('The Digitalocean Library for the league oAuth not found. Class: %s.', $class_name));
+      throw new SocialApiException(sprintf('The DigitalOcean library for PHP League OAuth2 not found. Class: %s.', $class_name));
     }
-    /* @var \Drupal\social_auth_digitalocean\Settings\DigitaloceanAuthSettings $settings */
+    /* @var \Drupal\social_auth_digitalocean\Settings\DigitalOceanAuthSettings $settings */
     $settings = $this->settings;
     if ($this->validateConfig($settings)) {
       // All these settings are mandatory.
@@ -159,14 +159,14 @@ class DigitaloceanAuth extends NetworkBase implements DigitaloceanAuthInterface 
   /**
    * Checks that module is configured.
    *
-   * @param \Drupal\social_auth_digitalocean\Settings\DigitaloceanAuthSettings $settings
-   *   The Digitalocean auth settings.
+   * @param \Drupal\social_auth_digitalocean\Settings\DigitalOceanAuthSettings $settings
+   *   The DigitalOcean auth settings.
    *
    * @return bool
    *   True if module is configured.
    *   False otherwise.
    */
-  protected function validateConfig(DigitaloceanAuthSettings $settings) {
+  protected function validateConfig(DigitalOceanAuthSettings $settings) {
     $client_id = $settings->getClientId();
     $client_secret = $settings->getClientSecret();
     if (!$client_id || !$client_secret) {

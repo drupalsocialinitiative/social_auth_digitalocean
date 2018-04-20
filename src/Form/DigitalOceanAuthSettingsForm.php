@@ -11,9 +11,9 @@ use Drupal\social_auth\Form\SocialAuthSettingsForm;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Settings form for Social Auth Digitalocean.
+ * Settings form for Social Auth DigitalOcean.
  */
-class DigitaloceanAuthSettingsForm extends SocialAuthSettingsForm {
+class DigitalOceanAuthSettingsForm extends SocialAuthSettingsForm {
 
   /**
    * The request context.
@@ -78,9 +78,9 @@ class DigitaloceanAuthSettingsForm extends SocialAuthSettingsForm {
 
     $form['digitalocean_settings'] = [
       '#type' => 'details',
-      '#title' => $this->t('Digitalocean Client settings'),
+      '#title' => $this->t('DigitalOcean Client settings'),
       '#open' => TRUE,
-      '#description' => $this->t('You need to first create a Digitalocean App at <a href="@digitalocean-dev">@digitalocean-dev</a>', ['@digitalocean-dev' => 'https://cloud.digitalocean.com/settings/api/applications']),
+      '#description' => $this->t('You need to first create a DigitalOcean App at <a href="@digitalocean-dev">@digitalocean-dev</a>', ['@digitalocean-dev' => 'https://cloud.digitalocean.com/settings/api/applications']),
     ];
 
     $form['digitalocean_settings']['client_id'] = [
@@ -103,7 +103,7 @@ class DigitaloceanAuthSettingsForm extends SocialAuthSettingsForm {
       '#type' => 'textfield',
       '#disabled' => TRUE,
       '#title' => $this->t('Application Callback URL'),
-      '#description' => $this->t('Copy this value to <em>Application Callback URL</em> field of your Digitalocean App settings.'),
+      '#description' => $this->t('Copy this value to <em>Application Callback URL</em> field of your DigitalOcean App settings.'),
       '#default_value' => $GLOBALS['base_url'] . '/user/login/digitalocean/callback',
     ];
 

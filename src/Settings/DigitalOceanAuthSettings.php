@@ -5,9 +5,9 @@ namespace Drupal\social_auth_digitalocean\Settings;
 use Drupal\social_api\Settings\SettingsBase;
 
 /**
- * Defines methods to get Social Auth Digitalocean settings.
+ * Defines methods to get Social Auth DigitalOcean settings.
  */
-class DigitaloceanAuthSettings extends SettingsBase implements DigitaloceanAuthSettingsInterface {
+class DigitalOceanAuthSettings extends SettingsBase implements DigitalOceanAuthSettingsInterface {
 
   /**
    * Client ID.

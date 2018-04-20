@@ -1,6 +1,6 @@
 social_auth_digitalocean.settings:
   type: config_object
-  label: 'Social Auth Digitalocean settings'
+  label: 'Social Auth DigitalOcean settings'
   mapping:
     client_id:
       type: string

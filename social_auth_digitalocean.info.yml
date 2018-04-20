@@ -1,6 +1,6 @@
-name: Social Auth Digitalocean
+name: Social Auth DigitalOcean
 type: module
-description: 'Social Auth integration for Digitalocean.'
+description: 'Social Auth integration for DigitalOcean.'
 package: Social
 core: 8.x
 configure: social_auth_digitalocean.settings_form
