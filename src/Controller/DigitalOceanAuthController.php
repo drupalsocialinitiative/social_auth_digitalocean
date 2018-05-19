@@ -172,10 +172,10 @@ class DigitalOceanAuthController extends ControllerBase {
       return $this->redirect('user.login');
     }
 
+    $this->digitalOceanManager->setClient($digitalOcean)->authenticate();
+
     // Saves access token to session.
     $this->dataHandler->set('access_token', $this->digitalOceanManager->getAccessToken());
-
-    $this->digitalOceanManager->setClient($digitalOcean)->authenticate();
 
     // Gets user's info from DigitalOcean API.
     /* @var \ChrisHemmings\OAuth2\Client\Provider\DigitalOceanResourceOwner $profile */
