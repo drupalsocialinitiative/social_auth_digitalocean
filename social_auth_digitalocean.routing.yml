@@ -1,7 +1,7 @@
 social_auth_digitalocean.redirect_to_digitalocean:
   path: 'user/login/digitalocean'
   defaults:
-    _controller: '\Drupal\social_auth_digitalocean\Controller\DigitalOceanAuthController::redirectToDigitalOcean'
+    _controller: '\Drupal\social_auth_digitalocean\Controller\DigitalOceanAuthController::redirectToProvider'
   requirements:
     # Anonymous users can log in, but authenticated users can also associate a new provider.
     _access: 'TRUE'
