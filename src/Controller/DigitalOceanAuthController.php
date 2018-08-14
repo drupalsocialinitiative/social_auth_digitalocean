@@ -2,18 +2,14 @@
 
 namespace Drupal\social_auth_digitalocean\Controller;
 
-use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\social_api\Plugin\NetworkManager;
 use Drupal\social_auth\Controller\OAuth2ControllerBase;
 use Drupal\social_auth\SocialAuthDataHandler;
-use Drupal\social_auth\SocialAuthUserManager;
 use Drupal\social_auth\User\UserAuthenticator;
 use Drupal\social_auth_digitalocean\DigitalOceanAuthManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\Core\Routing\TrustedRedirectResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 
 /**
  * Returns responses for Simple DigitalOcean Connect module routes.
@@ -26,7 +22,7 @@ class DigitalOceanAuthController extends OAuth2ControllerBase {
    * @param \Drupal\Core\Messenger\MessengerInterface $messenger
    *   The messenger service.
    * @param \Drupal\social_api\Plugin\NetworkManager $network_manager
-   *   Used to get an instance of social_auth_google network plugin.
+   *   Used to get an instance of social_auth_digitalocean network plugin.
    * @param \Drupal\social_auth\User\UserAuthenticator $user_authenticator
    *   Used to manage user authentication/registration.
    * @param \Drupal\social_auth_digitalocean\DigitalOceanAuthManager $digitalocean_manager

@@ -2,7 +2,7 @@
 
 namespace Drupal\Tests\social_auth_digitalocean\Functional;
 
-use Drupal\social_api\SocialApiSettingsFormBaseTest;
+use Drupal\Tests\social_auth\Functional\SocialAuthTestBase;
 
 /**
  * Test Social Auth DigitalOcean settings form.
@@ -11,7 +11,8 @@ use Drupal\social_api\SocialApiSettingsFormBaseTest;
  *
  * @ingroup social_auth_digitalocean
  */
-class SocialAuthDigitalOceanSettingsFormTest extends SocialApiSettingsFormBaseTest {
+class SocialAuthDigitalOceanSettingsFormTest extends SocialAuthTestBase {
+
   /**
    * Modules to enable.
    *
@@ -24,23 +25,33 @@ class SocialAuthDigitalOceanSettingsFormTest extends SocialApiSettingsFormBaseTe
    */
   protected function setUp() {
     $this->module = 'social_auth_digitalocean';
-    $this->socialNetwork = 'digitalocean';
+    $this->provider = 'digitalocean';
     $this->moduleType = 'social-auth';
 
     parent::setUp();
   }
 
   /**
-   * {@inheritdoc}
+   * Test if implementer is shown in the integration list.
    */
   public function testIsAvailableInIntegrationList() {
     $this->fields = ['client_id', 'client_secret'];
 
-    parent::testIsAvailableInIntegrationList();
+    $this->checkIsAvailableInIntegrationList();
   }
 
   /**
-   * {@inheritdoc}
+   * Test if permissions are set correctly for settings page.
+   *
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
+   * @throws \Behat\Mink\Exception\ExpectationException
+   */
+  public function testPermissionForSettingsPage() {
+    $this->checkPermissionForSettingsPage();
+  }
+
+  /**
+   * Test settings form submission.
    */
   public function testSettingsFormSubmission() {
     $this->edit = [
@@ -48,7 +59,7 @@ class SocialAuthDigitalOceanSettingsFormTest extends SocialApiSettingsFormBaseTe
       'client_secret' => $this->randomString(10),
     ];
 
-    parent::testSettingsFormSubmission();
+    $this->checkSettingsFormSubmission();
   }
 
 }
