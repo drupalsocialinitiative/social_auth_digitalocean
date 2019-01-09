@@ -7,6 +7,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Path\PathValidatorInterface;
 use Drupal\Core\Routing\RequestContext;
 use Drupal\Core\Routing\RouteProviderInterface;
+use Drupal\Core\Url;
 use Drupal\social_auth\Form\SocialAuthSettingsForm;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -104,7 +105,7 @@ class DigitalOceanAuthSettingsForm extends SocialAuthSettingsForm {
       '#disabled' => TRUE,
       '#title' => $this->t('Application Callback URL'),
       '#description' => $this->t('Copy this value to <em>Application Callback URL</em> field of your DigitalOcean App settings.'),
-      '#default_value' => $GLOBALS['base_url'] . '/user/login/digitalocean/callback',
+      '#default_value' => Url::fromRoute('social_auth_digitalocean.callback')->setAbsolute()->toString(),
     ];
 
     $form['digitalocean_settings']['advanced'] = [
