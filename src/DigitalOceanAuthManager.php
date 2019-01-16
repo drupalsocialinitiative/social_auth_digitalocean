@@ -6,7 +6,7 @@ use Drupal\social_auth\AuthManager\OAuth2Manager;
 use Drupal\Core\Config\ConfigFactory;
 
 /**
- * Contains all the logic for DigitalOcean login integration.
+ * Contains all the logic for DigitalOcean OAuth2 authentication.
  */
 class DigitalOceanAuthManager extends OAuth2Manager {
 
