@@ -71,7 +71,7 @@ class DigitalOceanAuthManager extends OAuth2Manager {
 
     $url = $domain . $path;
 
-    $request = $this->client->getAuthenticatedRequest('GET', $url, $this->getAccessToken());
+    $request = $this->client->getAuthenticatedRequest($method, $url, $this->getAccessToken());
 
     try {
       return $this->client->getParsedResponse($request);
