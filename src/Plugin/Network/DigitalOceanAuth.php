@@ -33,7 +33,7 @@ class DigitalOceanAuth extends NetworkBase implements DigitalOceanAuthInterface 
    * @return \ChrisHemmings\OAuth2\Client\Provider\DigitalOcean|false
    *   The initialized 3rd party library instance.
    *
-   * @throws SocialApiException
+   * @throws \Drupal\social_api\SocialApiException
    *   If the SDK library does not exist.
    */
   protected function initSdk() {

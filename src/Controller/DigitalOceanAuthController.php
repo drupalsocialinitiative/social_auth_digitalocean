@@ -71,11 +71,10 @@ class DigitalOceanAuthController extends OAuth2ControllerBase {
    */
   public function callback() {
 
-    // Checks if authentication failed.
-    if ($this->request->getCurrentRequest()->query->has('error')) {
-      $this->messenger->addError($this->t('You could not be authenticated.'));
-
-      return $this->redirect('user.login');
+    // Checks if there was an authentication error.
+    $redirect = $this->checkAuthError();
+    if ($redirect) {
+      return $redirect;
     }
 
     /* @var \ChrisHemmings\OAuth2\Client\Provider\DigitalOceanResourceOwner|null $profile */
@@ -91,7 +90,7 @@ class DigitalOceanAuthController extends OAuth2ControllerBase {
                                                         $profile->getEmail(),
                                                         $profile->getId(),
                                                         $this->providerManager->getAccessToken(),
-                                             FALSE,
+                                                        NULL,
                                                         $data);
     }
 
