@@ -43,7 +43,7 @@ class DigitalOceanAuth extends NetworkBase implements DigitalOceanAuthInterface 
       throw new SocialApiException(sprintf('The DigitalOcean library for PHP League OAuth2 not found. Class: %s.', $class_name));
     }
 
-    /* @var \Drupal\social_auth_digitalocean\Settings\DigitalOceanAuthSettings $settings */
+    /** @var \Drupal\social_auth_digitalocean\Settings\DigitalOceanAuthSettings $settings */
     $settings = $this->settings;
     if ($this->validateConfig($settings)) {
       // All these settings are mandatory.
